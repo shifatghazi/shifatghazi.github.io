@@ -16,6 +16,19 @@
   --font-body:'DM Sans',sans-serif;
   --font-mono:'DM Mono',monospace;
 }
+body.light-mode{
+  --bg:#f4f3fa;--bg2:#eceaf5;--bg3:#e2dff0;--card:#dddaed;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);
+  --text:#1a1830;--muted:#5a5878;
+}
+body.light-mode nav{background:rgba(244,243,250,0.92)}
+body.light-mode .hero-grid-bg{background-image:linear-gradient(rgba(123,104,238,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(123,104,238,.06) 1px,transparent 1px)}
+body.light-mode .t-body{background:#f0eef8;color:#2a2840}
+body.light-mode .t-host{color:#7b68ee}
+body.light-mode .t-path{color:#5a5878}
+body.light-mode pre.t-output{color:#2a2840}
+body.light-mode .resume-frame-wrap{background:var(--bg3)}
+body.light-mode .resume-frame-bar{background:var(--bg3)}
 html{scroll-behavior:smooth}
 body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
 
@@ -110,6 +123,12 @@ section{padding:7rem 4rem;position:relative}
 .exp-bullets li strong{color:var(--text);font-weight:500}
 .exp-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
 .exp-tag{font-family:var(--font-mono);font-size:.65rem;padding:.18rem .55rem;border-radius:3px;background:rgba(123,104,238,.08);border:1px solid rgba(123,104,238,.2);color:#a99cf5}
+
+/* EXP DIVIDER */
+.exp-divider{display:flex;align-items:center;gap:.75rem;margin:2.5rem 0 2rem;padding-left:2rem}
+.exp-divider-label{font-family:var(--font-mono);font-size:.65rem;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.exp-divider-line{flex:1;height:1px;background:linear-gradient(to right,rgba(78,205,196,.3),transparent)}
+.exp-item.vol::before{background:var(--accent2);box-shadow:0 0 0 3px rgba(78,205,196,.2)}
 
 /* IN ACTION */
 #action{background:var(--bg2)}
@@ -244,6 +263,19 @@ footer{padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 
+/* THEME TOGGLE */
+.theme-toggle{background:transparent;border:1px solid var(--border2);border-radius:6px;padding:.38rem .6rem;cursor:pointer;color:var(--muted);font-size:1rem;line-height:1;transition:all .2s;display:flex;align-items:center}
+.theme-toggle:hover{border-color:var(--accent);color:var(--text)}
+
+/* FLOATING NAV */
+.float-nav{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:99;display:flex;flex-direction:column;gap:.5rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.float-nav.visible{opacity:1;pointer-events:all}
+.float-nav-item{position:relative;display:flex;align-items:center;justify-content:flex-end;gap:.5rem}
+.float-nav-dot{width:8px;height:8px;border-radius:50%;background:var(--border2);border:1.5px solid var(--muted);cursor:pointer;transition:all .2s;flex-shrink:0}
+.float-nav-dot:hover,.float-nav-dot.active{background:var(--accent);border-color:var(--accent);transform:scale(1.35)}
+.float-nav-label{font-family:var(--font-mono);font-size:.65rem;color:var(--text);background:var(--bg3);border:1px solid var(--border2);padding:.2rem .55rem;border-radius:4px;white-space:nowrap;opacity:0;transform:translateX(6px);transition:all .18s;pointer-events:none}
+.float-nav-item:hover .float-nav-label{opacity:1;transform:translateX(0)}
+
 @media(max-width:900px){
   nav{padding:1rem 1.5rem}
   .nav-links{display:none}
@@ -253,10 +285,22 @@ footer{padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify
   .hero-right{display:none}
   .about-grid,.action-grid,.hobbies-grid,.vol-grid,.contact-grid,.resume-container{grid-template-columns:1fr;gap:2rem}
   footer{padding:1.5rem;flex-direction:column;gap:.5rem;text-align:center}
+  .float-nav{display:none}
 }
 </style>
 </head>
 <body>
+
+<!-- FLOATING SECTION NAV -->
+<div class="float-nav" id="float-nav">
+  <div class="float-nav-item"><span class="float-nav-label">Home</span><span class="float-nav-dot" data-target="hero"></span></div>
+  <div class="float-nav-item"><span class="float-nav-label">About</span><span class="float-nav-dot" data-target="about"></span></div>
+  <div class="float-nav-item"><span class="float-nav-label">Experience</span><span class="float-nav-dot" data-target="experience"></span></div>
+  <div class="float-nav-item"><span class="float-nav-label">Projects</span><span class="float-nav-dot" data-target="projects"></span></div>
+  <div class="float-nav-item"><span class="float-nav-label">Skills</span><span class="float-nav-dot" data-target="skills"></span></div>
+  <div class="float-nav-item"><span class="float-nav-label">Hobbies</span><span class="float-nav-dot" data-target="hobbies"></span></div>
+  <div class="float-nav-item"><span class="float-nav-label">Contact</span><span class="float-nav-dot" data-target="contact"></span></div>
+</div>
 
 <nav>
   <a href="#hero" class="nav-logo">SG<span>.</span></a>
@@ -265,11 +309,11 @@ footer{padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#volunteering">Volunteering</a></li>
     <li><a href="#hobbies">Hobbies</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="https://drive.google.com/file/d/10Mu1xLLghByaFOOKy4oivdKSx_uy9BhL/view?usp=sharing" target="_blank" class="nav-cta">Resume ↗</a>
+  <button class="theme-toggle" id="theme-toggle" title="Toggle light / dark mode">🌙</button>
 </nav>
 
 <!-- HERO -->
@@ -389,7 +433,7 @@ Type <span class="t-key">'help'</span> to see available commands.
 <section id="experience">
   <div class="section-label">Experience</div>
   <h2 class="section-title fade-in">Where I've worked</h2>
-  <p class="section-sub fade-in">From optical networking to federal data infrastructure.</p>
+  <p class="section-sub fade-in">From optical networking to federal data infrastructure — and leading in the student tech community.</p>
   <div class="exp-timeline">
     <div class="exp-item fade-in">
       <div class="exp-header"><div class="exp-company">Ciena</div><div class="exp-period">Sept 2025 – Present</div></div>
@@ -439,10 +483,104 @@ Type <span class="t-key">'help'</span> to see available commands.
       </ul>
       <div class="exp-tags"><span class="exp-tag">Python</span><span class="exp-tag">Kali Linux</span><span class="exp-tag">CTF</span><span class="exp-tag">Ruby</span></div>
     </div>
+
+    <!-- VOLUNTEERING DIVIDER -->
+    <div class="exp-divider fade-in">
+      <span class="exp-divider-label">🤝 Volunteering</span>
+      <span class="exp-divider-line"></span>
+    </div>
+
+    <div class="exp-item vol fade-in">
+      <div class="exp-header"><div class="exp-company">CU Blueprint</div><div class="exp-period">Sept 2023 – April 2024</div></div>
+      <div class="exp-role">Project Manager</div>
+      <div class="exp-location">Ottawa, Ontario</div>
+      <ul class="exp-bullets">
+        <li><span>Managed a team of web developers, UI/UX designers, and a red team.</span></li>
+        <li><span>Established design, algorithm, testing, and debugging processes for a web project.</span></li>
+        <li><span>Handled project delivery tracking with Jira, Power BI, and Microsoft Office.</span></li>
+      </ul>
+    </div>
+    <div class="exp-item vol fade-in">
+      <div class="exp-header"><div class="exp-company">CUSEC — Carleton Delegation</div><div class="exp-period">Sept 2023 – April 2024</div></div>
+      <div class="exp-role">Director of Technology</div>
+      <div class="exp-location">Montreal, Quebec</div>
+      <ul class="exp-bullets">
+        <li><span>Administered all technology projects for Canada's largest SWE conference delegation.</span></li>
+        <li><span>Executed website development supporting a database of up to 10k attendees.</span></li>
+        <li><span>Managed QA, image mirroring, website responsiveness, and integration testing.</span></li>
+      </ul>
+    </div>
+    <div class="exp-item vol fade-in">
+      <div class="exp-header"><div class="exp-company">SCESoc</div><div class="exp-period">Sept 2024 – April 2025</div></div>
+      <div class="exp-role">VP Assistant External</div>
+      <div class="exp-location">Ottawa, Ontario</div>
+      <ul class="exp-bullets">
+        <li><span>Coordinated partnerships with industry professionals and alumni.</span></li>
+        <li><span>Assisted in planning tech talks, info sessions, and networking nights.</span></li>
+        <li><span>Represented SCESoc in meetings with sponsors and external organizations.</span></li>
+      </ul>
+    </div>
+    <div class="exp-item vol fade-in">
+      <div class="exp-header"><div class="exp-company">Kumon / Shoppers Drug Mart</div><div class="exp-period">2018 – 2025</div></div>
+      <div class="exp-role">Teaching Assistant & Pharmacy Assistant</div>
+      <div class="exp-location">Ottawa, Ontario</div>
+      <ul class="exp-bullets">
+        <li><span><strong>Kumon (2018–2023):</strong> Marked tests and taught study strategies for Math and English students.</span></li>
+        <li><span><strong>Shoppers Drug Mart (2023–2025):</strong> Managed patient records software and maintained store operations.</span></li>
+      </ul>
+    </div>
   </div>
 </section>
+    <div class="exp-item fade-in">
+      <div class="exp-header"><div class="exp-company">Ciena</div><div class="exp-period">Sept 2025 – Present</div></div>
+      <div class="exp-role">Software Developer Intern</div>
+      <div class="exp-location">Kanata, Ontario</div>
+      <ul class="exp-bullets">
+        <li><span>Contribute to the <strong>Waveserver Platform</strong> team developing high-performance optical networking software in <strong>C, C++, and Python</strong> on Linux.</span></li>
+        <li><span>Participate across full SDLC collaborating with developers, QA, UX, and release teams.</span></li>
+        <li><span>Redesigned request routing in the <strong>Model Translator microservice</strong>, removing Config Manager from the critical path, achieving a <strong>50% reduction in end-to-end latency</strong>.</span></li>
+        <li><span>Conducted hardware–software integration testing on <strong>Waveserver AI</strong> hardware by injecting test attributes into XCVR modules.</span></li>
+        <li><span>Debug and optimize system-level software using <strong>GNU/GCC/GDB</strong> supporting performance-critical concurrent applications.</span></li>
+        <li><span>Built and maintained <strong>CI/CD pipelines</strong> using Git, Docker, Yocto, Bitbucket, Jenkins, Kubernetes, and Grafana.</span></li>
+      </ul>
+      <div class="exp-tags"><span class="exp-tag">C/C++</span><span class="exp-tag">Python</span><span class="exp-tag">Linux</span><span class="exp-tag">Kubernetes</span><span class="exp-tag">Jenkins</span><span class="exp-tag">Docker</span><span class="exp-tag">GDB</span></div>
+    </div>
+    <div class="exp-item fade-in">
+      <div class="exp-header"><div class="exp-company">Government of Canada</div><div class="exp-period">Jan 2025 – Aug 2025</div></div>
+      <div class="exp-role">Data Engineer Intern</div>
+      <div class="exp-location">Gatineau, Quebec</div>
+      <ul class="exp-bullets">
+        <li><span>Developed a <strong>Governance App using Power Apps</strong> to centralize large-scale Dataverse and SharePoint datasets, reducing workflow complexity by <strong>50%</strong>.</span></li>
+        <li><span>Designed and optimized <strong>SQL queries in SSMS</strong> to improve data extraction performance for large datasets.</span></li>
+        <li><span>Built <strong>ETL pipelines</strong> and data dashboards using SQL, Python, Power BI, and Azure (Databricks, Synapse, Data Factory).</span></li>
+        <li><span>Automated data access workflows using <strong>Power Automate</strong> with security group-based approval processes.</span></li>
+      </ul>
+      <div class="exp-tags"><span class="exp-tag">SQL</span><span class="exp-tag">Azure</span><span class="exp-tag">Power Apps</span><span class="exp-tag">Databricks</span><span class="exp-tag">Python</span><span class="exp-tag">Power BI</span></div>
+    </div>
+    <div class="exp-item fade-in">
+      <div class="exp-header"><div class="exp-company">Carleton University</div><div class="exp-period">May 2025 – Aug 2025</div></div>
+      <div class="exp-role">ML Research Assistant</div>
+      <div class="exp-location">Ottawa, Ontario</div>
+      <ul class="exp-bullets">
+        <li><span>Applied <strong>local LLMs (Ollama, Python)</strong> to analyze firewall logs and detect anomalies, automating cybersecurity tasks.</span></li>
+        <li><span>Designed and implemented <strong>RAG pipelines</strong> to extract and contextualize threat intelligence from large security datasets.</span></li>
+        <li><span>Built and evaluated <strong>LLM-based pipelines</strong> to process large-scale security data, improving output accuracy.</span></li>
+      </ul>
+      <div class="exp-tags"><span class="exp-tag">LLMs</span><span class="exp-tag">RAG</span><span class="exp-tag">Ollama</span><span class="exp-tag">Python</span></div>
+    </div>
+    <div class="exp-item fade-in">
+      <div class="exp-header"><div class="exp-company">Flex Point Security</div><div class="exp-period">May 2024 – Aug 2024</div></div>
+      <div class="exp-role">IT Security Intern</div>
+      <div class="exp-location">Toronto, Ontario</div>
+      <ul class="exp-bullets">
+        <li><span>Automated administrative and security tasks with <strong>Python scripts</strong>, reducing manual workload.</span></li>
+        <li><span>Supported IT infrastructure and cloud security tools (<strong>Kali Linux, Ruby, Windows VMs</strong>).</span></li>
+        <li><span>Completed hands-on labs in <strong>Steganography</strong> and <strong>Capture-the-Flag (CTF)</strong> challenges.</span></li>
+      </ul>
+      <div class="exp-tags"><span class="exp-tag">Python</span><span class="exp-tag">Kali Linux</span><span class="exp-tag">CTF</span><span class="exp-tag">Ruby</span></div>
+    </div>
 
-<!-- IN ACTION -->
+    <!-- VOLUNTEERING DIVIDER -->
 <section id="action">
   <div class="action-grid fade-in">
     <div class="action-photo">
@@ -525,18 +663,6 @@ Type <span class="t-key">'help'</span> to see available commands.
 </section>
 
 
-
-<!-- VOLUNTEERING -->
-<section id="volunteering">
-  <div class="section-label">Volunteering</div>
-  <h2 class="section-title fade-in">Giving back</h2>
-  <div class="vol-grid">
-    <div class="vol-card fade-in"><div class="vol-org">CU Blueprint</div><div class="vol-role">Project Manager</div><div class="vol-period">Sept 2023 – April 2024 · Ottawa</div><ul class="vol-bullets"><li><span>Managed a team of web developers, UI/UX designers, and a red team.</span></li><li><span>Established design, algorithm, testing, and debugging processes for a web project.</span></li><li><span>Handled project delivery tracking with Jira, Power BI, and Microsoft Office.</span></li></ul></div>
-    <div class="vol-card fade-in"><div class="vol-org">CUSEC — Carleton Delegation</div><div class="vol-role">Director of Technology</div><div class="vol-period">Sept 2023 – April 2024 · Montreal</div><ul class="vol-bullets"><li><span>Administered all technology projects for Canada's largest SWE conference delegation.</span></li><li><span>Executed website development supporting a database of up to 10k attendees.</span></li><li><span>Managed QA, image mirroring, website responsiveness, and integration testing.</span></li></ul></div>
-    <div class="vol-card fade-in"><div class="vol-org">SCESoc (Systems & Computer Engineering Society)</div><div class="vol-role">VP Assistant External</div><div class="vol-period">Sept 2024 – April 2025 · Ottawa</div><ul class="vol-bullets"><li><span>Coordinated partnerships with industry professionals and alumni.</span></li><li><span>Assisted in planning tech talks, info sessions, and networking nights.</span></li><li><span>Represented SCESoc in meetings with sponsors and external organizations.</span></li></ul></div>
-    <div class="vol-card fade-in"><div class="vol-org">Non-Academic Experience</div><div class="vol-role">Teaching Assistant & Pharmacy Assistant</div><div class="vol-period">2018 – 2025</div><ul class="vol-bullets"><li><span><strong style="color:var(--text)">Kumon (2018–2023):</strong> Marked tests and taught study strategies for Math and English students.</span></li><li><span><strong style="color:var(--text)">Shoppers Drug Mart (2023–2025):</strong> Managed patient records software and maintained store operations.</span></li></ul></div>
-  </div>
-</section>
 
 <!-- HOBBIES -->
 <section id="hobbies">
@@ -745,6 +871,48 @@ function sendMsg() {
   window.location.href = mailto;
   document.getElementById('cf-status').style.display = 'block';
 }
+
+// THEME TOGGLE
+const themeBtn = document.getElementById('theme-toggle');
+const saved = localStorage.getItem('theme');
+if (saved === 'light') { document.body.classList.add('light-mode'); themeBtn.textContent = '☀️'; }
+themeBtn.addEventListener('click', () => {
+  const isLight = document.body.classList.toggle('light-mode');
+  themeBtn.textContent = isLight ? '☀️' : '🌙';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+});
+
+// FLOATING SECTION NAV
+const floatNav = document.getElementById('float-nav');
+const sections = ['hero','about','experience','projects','skills','hobbies','contact'];
+const dots = document.querySelectorAll('.float-nav-dot');
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const t = document.getElementById(dot.dataset.target);
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+function updateFloatNav() {
+  const scrollY = window.scrollY;
+  // Show after scrolling past hero
+  if (scrollY > 200) floatNav.classList.add('visible');
+  else floatNav.classList.remove('visible');
+
+  // Highlight active section
+  let current = 'hero';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 120) current = id;
+  });
+  dots.forEach(d => {
+    d.classList.toggle('active', d.dataset.target === current);
+  });
+}
+
+window.addEventListener('scroll', updateFloatNav, { passive: true });
+updateFloatNav();
 </script>
 <script data-goatcounter="https://sghazi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
