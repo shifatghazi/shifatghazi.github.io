@@ -1,3 +1,35 @@
+why is claude not working
+index (28).html
+File
+are you able to modifiy just the links added to my resume such that they are changed to https://drive.google.com/file/d/1jJ00t88SppLMe72o9xZ4CIQTxZ5J9xdY/view?usp=sharing instead, all other features should reamint he same,
+Everything is good except for this last one, the download button here is using the old link
+
+Yes — open the updated file below and it should render the full website in your browser:
+
+Preview / Open Updated Portfolio
+
+The Open Full Resume ↗ and Download PDF ↓ buttons should now both point to the new resume.
+
+index_resume_link_updated.html
+HTML
+Given i've found a coop for the fall, text in the wesbite saying looking for fall 2026 intern/coop type of working can be removed
+
+Done. I removed the Fall 2026 co-op/intern availability messaging from the website, including the availability indicator/banner. Everything else—including the resume links and styling—remains unchanged.
+
+Preview the updated website 
+
+index_resume_link_updated.html
+HTML
+how about here
+
+Yep, good catch. I removed the “Open to Fall 2026 co-ops, internships…” wording there too.
+
+I replaced it with:
+
+Interested in connecting, collaborating, or discussing new ideas? Let's build something together.
+
+Preview the updated website 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -312,7 +344,7 @@ footer{padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify
     <li><a href="#hobbies">Hobbies</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="https://drive.google.com/file/d/10Mu1xLLghByaFOOKy4oivdKSx_uy9BhL/view?usp=sharing" target="_blank" class="nav-cta">Resume ↗</a>
+  <a href="https://drive.google.com/file/d/1jJ00t88SppLMe72o9xZ4CIQTxZ5J9xdY/view?usp=sharing" target="_blank" class="nav-cta">Resume ↗</a>
   <button class="theme-toggle" id="theme-toggle" title="Toggle light / dark mode">🌙</button>
 </nav>
 
@@ -321,7 +353,6 @@ footer{padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify
   <div class="hero-grid-bg"></div>
   <div class="hero-glow"></div>
   <div class="hero-left fade-in">
-    <div class="hero-avail"><span class="avail-dot"></span>Available for Fall 2026 co-op / internship</div>
     <h1 class="hero-name">Shifat<br><span class="line2">Ghazi</span></h1>
     <div class="hero-typing-wrap">
       <span class="prompt">$</span>
@@ -596,8 +627,8 @@ Type <span class="t-key">'help'</span> to see available commands.
       <div style="width:100%;height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;background:var(--bg);padding:2rem;text-align:center">
         <div style="font-size:3rem">📄</div>
         <div style="font-family:var(--font-mono);font-size:.78rem;color:var(--muted);line-height:1.7">Shifat_Ghazi_Resume.pdf<br><span style="font-size:.65rem;color:rgba(136,134,160,.5)">Google Drive preview blocked by browser</span></div>
-        <a href="https://drive.google.com/file/d/10Mu1xLLghByaFOOKy4oivdKSx_uy9BhL/view?usp=sharing" target="_blank" class="btn-primary" style="font-size:.8rem">Open Full Resume ↗</a>
-        <a href="https://drive.google.com/uc?export=download&id=10Mu1xLLghByaFOOKy4oivdKSx_uy9BhL" target="_blank" class="btn-outline" style="font-size:.8rem">Download PDF ↓</a>
+        <a href="https://drive.google.com/file/d/1jJ00t88SppLMe72o9xZ4CIQTxZ5J9xdY/view?usp=sharing" target="_blank" class="btn-primary" style="font-size:.8rem">Open Full Resume ↗</a>
+        <a href="https://drive.google.com/uc?export=download&id=1jJ00t88SppLMe72o9xZ4CIQTxZ5J9xdY" target="_blank" class="btn-outline" style="font-size:.8rem">Download PDF ↓</a>
       </div>
     </div>
     <div class="resume-info">
@@ -610,7 +641,7 @@ Type <span class="t-key">'help'</span> to see available commands.
         <li>15+ languages and frameworks</li>
         <li>50% latency reduction achieved at Ciena</li>
       </ul>
-      <a href="https://drive.google.com/file/d/10Mu1xLLghByaFOOKy4oivdKSx_uy9BhL/view?usp=sharing" target="_blank" class="btn-primary" style="width:fit-content">Download Resume ↓</a>
+      <a href="https://drive.google.com/file/d/1jJ00t88SppLMe72o9xZ4CIQTxZ5J9xdY/view?usp=sharing" target="_blank" class="btn-primary" style="width:fit-content">Download Resume ↓</a>
     </div>
   </div>
 </section>
@@ -640,7 +671,7 @@ Type <span class="t-key">'help'</span> to see available commands.
 <section id="contact">
   <div class="section-label">Get in Touch</div>
   <h2 class="section-title fade-in" style="text-align:center">Contact</h2>
-  <p class="section-sub fade-in" style="text-align:center;margin:0 auto 3rem">Open to Fall 2026 co-ops, internships, and interesting projects. Let's build something together.</p>
+  <p class="section-sub fade-in" style="text-align:center;margin:0 auto 3rem">Interested in connecting, collaborating, or discussing new ideas? Let's build something together.</p>
   <div class="contact-grid fade-in">
     <div class="contact-form-card">
       <h3>Send a message</h3>
@@ -663,8 +694,7 @@ Type <span class="t-key">'help'</span> to see available commands.
         <div class="contact-link-icon">in</div>
         <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-val">linkedin.com/in/shifat-ghazi</div></div>
       </a>
-      <div class="avail-banner"><span class="avail-banner-dot"></span><span>Looking for Fall 2026 co-op / internship</span></div>
-      <a href="https://drive.google.com/file/d/10Mu1xLLghByaFOOKy4oivdKSx_uy9BhL/view?usp=sharing" target="_blank" class="download-resume-btn">
+      <a href="https://drive.google.com/file/d/1jJ00t88SppLMe72o9xZ4CIQTxZ5J9xdY/view?usp=sharing" target="_blank" class="download-resume-btn">
         <span>Download Resume</span><span class="arr">→</span>
       </a>
     </div>
@@ -777,7 +807,7 @@ Holds a <span class="t-key">Government of Canada Secret Clearance</span> · GPA 
 <span class="t-key">LINKEDIN</span> https://linkedin.com/in/shifat-ghazi
 <span class="t-key">LOCATION</span> Ottawa, Canada`,
 
-  resume: `View resume:  <span class="t-link">https://drive.google.com/file/d/10Mu1xLLghByaFOOKy4oivdKSx_uy9BhL/view?usp=sharing</span>
+  resume: `View resume:  <span class="t-link">https://drive.google.com/file/d/1jJ00t88SppLMe72o9xZ4CIQTxZ5J9xdY/view?usp=sharing</span>
 Use the Resume Preview section above or click the link above to download.`
 };
 
@@ -870,3 +900,5 @@ updateFloatNav();
 <script data-goatcounter="https://sghazi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
+index_resume_link_updated.html
+HTML
